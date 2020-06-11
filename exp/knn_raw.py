@@ -30,10 +30,12 @@ NORMALIZE = True
 confirmed = os.path.join(
     BASE_PATH, 
     'csse_covid_19_time_series',
-    'time_series_19-covid-Confirmed.csv')
+    'time_series_covid19_confirmed_global.csv')
 confirmed = data.load_csv_data(confirmed)
 features = []
 targets = []
+
+
 
 for val in np.unique(confirmed["Country/Region"]):
     df = data.filter_by_attribute(
@@ -64,7 +66,6 @@ for _dist in ['minkowski', 'manhattan']:
         if NORMALIZE:
             tr_features = tr_features / tr_features.sum(axis=-1, keepdims=True)
         tr_targets = tr_targets[above_min_cases]
-
         # train knn
         knn = KNeighborsClassifier(n_neighbors=N_NEIGHBORS, metric=_dist)
         knn.fit(tr_features, tr_targets)
@@ -78,5 +79,5 @@ for _dist in ['minkowski', 'manhattan']:
             predictions[val] = {}
         predictions[val][_dist] = label.tolist()
 
-with open('results/knn_raw.json', 'w') as f:
-    json.dump(predictions, f, indent=4)
+#with open('results/knn_raw.json', 'w') as f:
+    #json.dump(predictions, f, indent=4)

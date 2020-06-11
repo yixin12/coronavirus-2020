@@ -20,23 +20,25 @@ from sklearn.neighbors import (
     DistanceMetric
 )
 import json
+import scipy
+import matplotlib.pyplot as plt
 
 # ------------ HYPERPARAMETERS -------------
 BASE_PATH = '../COVID-19/csse_covid_19_data/'
 N_NEIGHBORS = 5
 MIN_CASES = 1000
-N_BINS = 20
+N_BINS = 30
 NORMALIZE = True
 # ------------------------------------------
 
 confirmed = os.path.join(
     BASE_PATH, 
     'csse_covid_19_time_series',
-    'time_series_19-covid-Confirmed.csv')
+    'time_series_covid19_confirmed_global.csv')
 confirmed = data.load_csv_data(confirmed)
 features = []
 targets = []
-
+'''
 for val in np.unique(confirmed["Country/Region"]):
     df = data.filter_by_attribute(
         confirmed, "Country/Region", val)
@@ -86,5 +88,16 @@ for _dist in ['minkowski', 'manhattan']:
             predictions[val] = {}
         predictions[val][_dist] = label.tolist()
 
-with open('results/knn_dist_diff.json', 'w') as f:
-    json.dump(predictions, f, indent=4)
+#with open('results/knn_dist_diff.json', 'w') as f:
+    #json.dump(predictions, f, indent=4)
+'''
+
+
+
+
+
+
+
+
+
+
